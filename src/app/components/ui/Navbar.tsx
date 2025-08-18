@@ -91,7 +91,7 @@ const Navbar = () => {
               <div className="absolute inset-0 rounded-lg bg-[#ffa238]/20 scale-0 group-hover:scale-110 transition-transform duration-300" />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-white to-[#ffa238] bg-clip-text text-transparent">
-              Tradewings
+              Tradewinggs
             </span>
           </motion.a>
 
