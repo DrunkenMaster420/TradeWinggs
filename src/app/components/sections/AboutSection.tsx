@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 
 // --- SVG Icon Components ---
 // Replacing react-icons with inline SVGs to remove external dependencies.
@@ -130,12 +130,20 @@ const FiEye = ({ size = 28, className = "" }) => (
   </svg>
 );
 
+// Interface for FeatureCard props
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  index: number;
+}
+
 // A reusable component for the feature cards to keep the main component clean.
-const FeatureCard = ({ icon, title, description, index }) => {
-  const cardRef = useRef(null);
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, index }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-100px" });
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, scale: 0.8, y: 50 },
     visible: {
       opacity: 1,
@@ -144,7 +152,7 @@ const FeatureCard = ({ icon, title, description, index }) => {
       transition: {
         duration: 0.6,
         delay: index * 0.15,
-        ease: [0.25, 1, 0.5, 1], // A nice ease-out curve
+        ease: "easeOut"
       },
     },
   };
@@ -177,6 +185,31 @@ const FeatureCard = ({ icon, title, description, index }) => {
 const AboutSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-200px" });
+
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
 
   // Updated data based on the provided text
   const whyChooseUs = [
@@ -212,23 +245,7 @@ const AboutSection = () => {
     },
   ];
 
-  // Animation variants for Framer Motion
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-    },
-  };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
 
   return (
     <section
@@ -274,7 +291,7 @@ const AboutSection = () => {
             Your Brand Partner in the Digital World
           </h2>
           <p className="text-lg md:text-xl text-[#4e5458] max-w-3xl mx-auto leading-relaxed">
-            At Tradewinggs, we don't just market brands — we help them make an
+            At Tradewinggs, we don&apos;t just market brands — we help them make an
             impact. We combine innovative ideas, data-driven strategies, and
             eye-catching content to ensure your brand stands out.
           </p>

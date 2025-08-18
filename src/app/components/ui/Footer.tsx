@@ -8,17 +8,11 @@ import {
   FaLinkedin,
   FaYoutube,
   FaMapMarkerAlt,
-  FaWhatsapp,
-  FaHeart,
-  FaArrowUp,
   FaGlobe,
 } from "react-icons/fa";
-import { MdEmail, MdPhone } from "react-icons/md";
-import { HiSparkles } from "react-icons/hi";
+import { MdPhone } from "react-icons/md";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   // Generate random particles only on client after mount
   const [particles, setParticles] = React.useState<
     Array<{
@@ -85,10 +79,6 @@ const Footer = () => {
     },
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-[#232a2f] via-[#1d2429] to-[#232a2f]">
       {/* Enhanced Background Elements */}
@@ -134,7 +124,7 @@ const Footer = () => {
               <div className="relative">
                 <Image
                   src="/assets/logo.jpg"
-                  alt="TradeWings Logo"
+                  alt="Tradewings Logo"
                   width={32}
                   height={32}
                   className="rounded-lg shadow-lg ring-1 ring-[#ffa238]/50"
@@ -143,7 +133,7 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="font-bold text-sm bg-gradient-to-r from-[#ffa238] to-[#ffa238]/70 bg-clip-text text-transparent">
-                  TradeWings
+                  Tradewings
                 </h3>
                 <p className="text-[#ffffff]/70 text-xs">Digital Excellence</p>
               </div>

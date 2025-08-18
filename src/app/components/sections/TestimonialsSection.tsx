@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
@@ -64,18 +64,22 @@ const TestimonialsSection = () => {
 
   const length = testimonials.length;
 
-  const nextTestimonial = () =>
-    setCurrent(current === length - 1 ? 0 : current + 1);
+  // ✅ Fixed: Wrapped in useCallback for stable reference
+  const nextTestimonial = useCallback(
+    () => setCurrent(current === length - 1 ? 0 : current + 1),
+    [current, length]
+  );
+
   const prevTestimonial = () =>
     setCurrent(current === 0 ? length - 1 : current - 1);
 
-  // Auto-advance testimonials
+  // ✅ Fixed: Auto-advance testimonials with proper dependencies
   useEffect(() => {
     const timer = setInterval(() => {
       nextTestimonial();
     }, 6000);
     return () => clearInterval(timer);
-  }, [current]);
+  }, [nextTestimonial]);
 
   return (
     <section
@@ -161,7 +165,7 @@ const TestimonialsSection = () => {
             </span>
           </h2>
           <p className="text-xl text-[#4e5458] max-w-3xl mx-auto leading-relaxed">
-            Don't just take our word for it. Here's what our satisfied clients
+            Don&apos;t just take our word for it. Here&apos;s what our satisfied clients
             have to say about our services and results.
           </p>
         </motion.div>
@@ -222,7 +226,7 @@ const TestimonialsSection = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  "{testimonials[current].review}"
+                  &quot;{testimonials[current].review}&quot;
                 </motion.p>
 
                 {/* Enhanced Client Info */}
@@ -293,11 +297,10 @@ const TestimonialsSection = () => {
               <motion.button
                 key={index}
                 onClick={() => setCurrent(index)}
-                className={`relative overflow-hidden transition-all duration-300 ${
-                  current === index
+                className={`relative overflow-hidden transition-all duration-300 ${current === index
                     ? "w-12 h-4 bg-[#ffa238] rounded-full"
                     : "w-4 h-4 bg-[#4e5458]/30 hover:bg-[#ffa238]/50 rounded-full"
-                }`}
+                  }`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -327,8 +330,6 @@ const TestimonialsSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Statistics Section */}
       </div>
     </section>
   );

@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
-// --- SVG Icons (to remove external dependencies) ---
-const FiArrowRight = (props) => (
+// ✅ Fixed: SVG Icons with proper TypeScript typing
+const FiArrowRight = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     stroke="currentColor"
     fill="none"
@@ -21,7 +22,7 @@ const FiArrowRight = (props) => (
   </svg>
 );
 
-const FiArrowLeft = (props) => (
+const FiArrowLeft = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     stroke="currentColor"
     fill="none"
@@ -39,7 +40,7 @@ const FiArrowLeft = (props) => (
   </svg>
 );
 
-// --- Slide Interface ---
+// Slide Interface
 interface Slide {
   title: string;
   description: string;
@@ -48,13 +49,13 @@ interface Slide {
   image: string;
 }
 
-// --- Component Props ---
+// Component Props
 interface CarouselProps {
   slides: Slide[];
   autoplayInterval?: number;
 }
 
-// --- Framer Motion Variants ---
+// Framer Motion Variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -73,7 +74,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   },
 };
@@ -85,7 +86,7 @@ const backgroundVariants = {
     opacity: 1,
     transition: {
       duration: 1.2,
-      ease: [0.43, 0.13, 0.23, 0.96],
+      ease: [0.43, 0.13, 0.23, 0.96] as const,
     },
   },
   exit: {
@@ -93,12 +94,15 @@ const backgroundVariants = {
     opacity: 0,
     transition: {
       duration: 0.8,
-      ease: [0.43, 0.13, 0.23, 0.96],
+      ease: [0.43, 0.13, 0.23, 0.96] as const,
     },
   },
 };
 
-const HeroCarousel = ({ slides, autoplayInterval = 8000 }: CarouselProps) => {
+const HeroCarousel = ({
+  slides,
+  autoplayInterval = 8000,
+}: CarouselProps) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
 
@@ -144,10 +148,13 @@ const HeroCarousel = ({ slides, autoplayInterval = 8000 }: CarouselProps) => {
             exit="exit"
             className="absolute inset-0"
           >
-            <img
+            <Image
               src={activeSlide.image}
               alt={activeSlide.title}
               className="w-full h-full object-cover"
+              fill
+              priority
+              sizes="100vw"
             />
             {/* Enhanced Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
@@ -186,10 +193,7 @@ const HeroCarousel = ({ slides, autoplayInterval = 8000 }: CarouselProps) => {
                 </motion.p>
 
                 {/* CTA Buttons */}
-                <motion.div
-                  variants={itemVariants}
-                  className="flex flex-col sm:flex-row gap-4"
-                >
+                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
                   <motion.a
                     href={activeSlide.ctaLink}
                     className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-orange-500 rounded-full overflow-hidden transition-all duration-300 hover:bg-orange-600 shadow-lg hover:shadow-orange-500/40"
@@ -211,7 +215,7 @@ const HeroCarousel = ({ slides, autoplayInterval = 8000 }: CarouselProps) => {
       {/* Navigation & Pagination Container */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full max-w-xs md:max-w-sm">
         <div className="flex items-center justify-between bg-black/30 backdrop-blur-lg border border-white/10 rounded-full p-2 shadow-2xl">
-          {/* Previous Button */}
+          {/* ✅ Fixed: Previous Button without size prop */}
           <motion.button
             onClick={prevSlide}
             className="text-white p-3 rounded-full transition-colors duration-300 hover:bg-white/20 disabled:opacity-50"
@@ -219,7 +223,7 @@ const HeroCarousel = ({ slides, autoplayInterval = 8000 }: CarouselProps) => {
             whileTap={{ scale: 0.9 }}
             disabled={current === 0}
           >
-            <FiArrowLeft size={20} />
+            <FiArrowLeft className="w-5 h-5" />
           </motion.button>
 
           {/* Pagination Dots */}
@@ -231,17 +235,16 @@ const HeroCarousel = ({ slides, autoplayInterval = 8000 }: CarouselProps) => {
                 className="relative w-2 h-2 rounded-full transition-colors duration-300"
               >
                 <span
-                  className={`block w-full h-full rounded-full ${
-                    current === index
+                  className={`block w-full h-full rounded-full ${current === index
                       ? "bg-white"
                       : "bg-white/40 hover:bg-white/70"
-                  }`}
+                    }`}
                 />
               </button>
             ))}
           </div>
 
-          {/* Next Button */}
+          {/* ✅ Fixed: Next Button without size prop */}
           <motion.button
             onClick={nextSlide}
             className="text-white p-3 rounded-full transition-colors duration-300 hover:bg-white/20 disabled:opacity-50"
@@ -249,7 +252,7 @@ const HeroCarousel = ({ slides, autoplayInterval = 8000 }: CarouselProps) => {
             whileTap={{ scale: 0.9 }}
             disabled={current === length - 1}
           >
-            <FiArrowRight size={20} />
+            <FiArrowRight className="w-5 h-5" />
           </motion.button>
         </div>
       </div>

@@ -8,14 +8,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TradeWings - Your Brand Partner in the Digital World",
+  title: "Tradewings - Your Brand Partner in the Digital World",
   description:
     "Professional digital marketing services including SEO, social media marketing, web development, and product trading solutions.",
   keywords:
     "digital marketing, SEO, social media, web development, branding, Gwalior",
-  authors: [{ name: "TradeWings" }],
-  creator: "TradeWings",
-  publisher: "TradeWings",
+  authors: [{ name: "Tradewings" }],
+  creator: "Tradewings",
+  publisher: "Tradewings",
   formatDetection: {
     email: false,
     address: false,
@@ -47,22 +47,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "TradeWings - Your Brand Partner in the Digital World",
+    title: "Tradewings - Your Brand Partner in the Digital World",
     description:
       "Professional digital marketing services including SEO, social media marketing, web development, and product trading solutions.",
-    siteName: "TradeWings",
+    siteName: "Tradewings",
     images: [
       {
         url: "/assets/logo.jpg",
         width: 1200,
         height: 630,
-        alt: "TradeWings Logo",
+        alt: "Tradewings Logo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TradeWings - Your Brand Partner in the Digital World",
+    title: "Tradewings - Your Brand Partner in the Digital World",
     description:
       "Professional digital marketing services including SEO, social media marketing, web development, and product trading solutions.",
     images: ["/assets/logo.jpg"],

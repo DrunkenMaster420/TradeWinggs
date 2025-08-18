@@ -1,11 +1,30 @@
 "use client";
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 
 // --- SVG Icon Components (replaces react-icons) ---
 
+interface IconProps {
+  className?: string;
+  size?: number;
+}
+
+interface BlogPost {
+  title: string;
+  excerpt: string;
+  author: string;
+  date: string;
+  readTime: string;
+  content: string;
+}
+
+interface BlogModalProps {
+  post: BlogPost;
+  onClose: () => void;
+}
+
 // User Icon SVG
-const FiUser = ({ className }) => (
+const FiUser: React.FC<IconProps> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -24,7 +43,7 @@ const FiUser = ({ className }) => (
 );
 
 // Clock Icon SVG
-const FiClock = ({ className }) => (
+const FiClock: React.FC<IconProps> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -43,7 +62,7 @@ const FiClock = ({ className }) => (
 );
 
 // ArrowRight Icon SVG
-const FiArrowRight = ({ className }) => (
+const FiArrowRight: React.FC<IconProps> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -62,7 +81,7 @@ const FiArrowRight = ({ className }) => (
 );
 
 // Close Icon SVG
-const FiX = ({ className }) => (
+const FiX: React.FC<IconProps> = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -166,7 +185,7 @@ Being small is not a weakness — it’s your superpower. You can be more flexib
   },
 ];
 
-const BlogModal = ({ post, onClose }) => {
+const BlogModal: React.FC<BlogModalProps> = ({ post, onClose }) => {
   if (!post) return null;
 
   return (
@@ -213,21 +232,20 @@ const BlogModal = ({ post, onClose }) => {
 };
 
 const BlogSection = () => {
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
-    visible: (i) => ({
+    visible: {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.2,
         duration: 0.6,
-        ease: "easeOut",
+        ease: [0.43, 0.13, 0.23, 0.96], // Custom easing curve
       },
-    }),
+    },
   };
 
   return (
