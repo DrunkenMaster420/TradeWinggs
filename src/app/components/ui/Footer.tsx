@@ -160,8 +160,8 @@ const Footer = () => {
               {[
                 {
                   icon: <MdPhone className="text-[#ffa238]" size={10} />,
-                  text: "+91 88638 35862",
-                  href: "tel:+918863835862",
+                  text: "+91 7974168197",
+                  href: "tel:+917974168197",
                 },
                 {
                   icon: <FaMapMarkerAlt className="text-blue-400" size={10} />,

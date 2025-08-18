@@ -638,8 +638,8 @@ const ContactSection = () => {
                 <ContactInfoItem
                   icon={FaEnvelope}
                   title="Email"
-                  value="info@tradewinggs.com"
-                  href="mailto:info@tradewinggs.com"
+                  value="tradewinggs@gmail.com"
+                  href="mailto:tradewinggs@gmail.com"
                   colorClass="bg-blue-500/20 text-blue-400"
                 />
 
@@ -654,8 +654,8 @@ const ContactSection = () => {
                 <ContactInfoItem
                   icon={FaPhone}
                   title="Phone"
-                  value="+91 88638 35862"
-                  href="tel:+918863835862"
+                  value="+91 7974168197"
+                  href="tel:+917974168197"
                   colorClass="bg-[#FFA238]/20 text-[#FFA238]"
                 />
 
