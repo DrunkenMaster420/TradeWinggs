@@ -11,55 +11,36 @@ const TestimonialsSection = () => {
 
   const testimonials = [
     {
-      name: "John Doe",
-      position: "CEO, Acme Corp",
+      name: "Bhawan Mishra",
+      position: "Director, Swastik Financial Services",
       review:
-        "Tradewinggs transformed our online presence completely. Their creative approach and results-driven strategies helped us achieve 300% growth in leads. The team is professional, responsive, and truly understands digital marketing. Highly recommend!",
+        "Tradewinggs has helped us generate high-quality leads and manage our social media presence with great professionalism. Their strategies are smart, targeted, and deliver consistent results. It’s like having an in-house marketing team that truly cares about our success.",
       rating: 5,
       image: "/testimonials/john.jpg",
-      company: "Acme Corporation",
-      industry: "Technology",
+      // company: "Acme Corporation",
+      // industry: "Technology",
     },
     {
-      name: "Jane Smith",
-      position: "Marketing Head, Beta Inc.",
+      name: "Kavita Jain",
+      position: "Owner, Lakshya Auto Sales",
       review:
-        "Outstanding professional team with exceptional communication skills. They delivered our website and comprehensive digital marketing campaign on time and exceeded all our expectations. The ROI has been incredible.",
+        "Working with Tradewinggs for our social media marketing has been a game-changer. Our brand visibility has grown tremendously, and we’re connecting with more customers than ever before. The team’s creativity, timely execution, and attention to detail are commendable!",
       rating: 5,
       image: "/testimonials/jane.jpg",
-      company: "Beta Industries",
-      industry: "Manufacturing",
+      company: "",
+      industry: "",
     },
     {
-      name: "Michael Lee",
-      position: "Founder, StartUpX",
+      name: "Gopal Garg",
+      position: "CEO, Garg Digital Studio",
       review:
-        "Excellent services and amazing ROI from day one. The team at Tradewinggs understood our vision perfectly and brought it to life with innovative digital solutions. Our brand visibility has increased tremendously.",
+        "We got our website made by Tradewinggs, and honestly, they did an amazing job. The design looks great, is super easy to use, and totally matches our brand. The whole process was smooth, and they delivered exactly what they said.",
       rating: 5,
       image: "/testimonials/michael.jpg",
-      company: "StartUpX",
-      industry: "E-commerce",
+      company: "",
+      industry: "",
     },
-    {
-      name: "Sarah Wilson",
-      position: "Director, TechFlow",
-      review:
-        "Working with Tradewinggs has been a game-changer for our business. Their innovative strategies and attention to detail helped us reach new heights. The team's dedication and expertise shine through in every project.",
-      rating: 5,
-      image: "/testimonials/sarah.jpg",
-      company: "TechFlow Solutions",
-      industry: "Software",
-    },
-    {
-      name: "David Chen",
-      position: "Founder, GrowthLabs",
-      review:
-        "Exceptional service quality and outstanding results! Tradewinggs not only met our expectations but exceeded them in every way. Their data-driven approach has significantly boosted our online presence.",
-      rating: 5,
-      image: "/testimonials/david.jpg",
-      company: "GrowthLabs",
-      industry: "Marketing",
-    },
+
   ];
 
   const length = testimonials.length;
@@ -298,8 +279,8 @@ const TestimonialsSection = () => {
                 key={index}
                 onClick={() => setCurrent(index)}
                 className={`relative overflow-hidden transition-all duration-300 ${current === index
-                    ? "w-12 h-4 bg-[#ffa238] rounded-full"
-                    : "w-4 h-4 bg-[#4e5458]/30 hover:bg-[#ffa238]/50 rounded-full"
+                  ? "w-12 h-4 bg-[#ffa238] rounded-full"
+                  : "w-4 h-4 bg-[#4e5458]/30 hover:bg-[#ffa238]/50 rounded-full"
                   }`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}

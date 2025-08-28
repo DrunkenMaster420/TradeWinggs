@@ -57,25 +57,25 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: <FaFacebook size={14} />,
-      href: "#",
+      href: "https://www.facebook.com/share/1AwXnMd7D1/",
       label: "Facebook",
       gradient: "from-blue-600 to-blue-700",
     },
     {
       icon: <FaInstagram size={14} />,
-      href: "#",
+      href: "https://www.instagram.com/trade_winggs/",
       label: "Instagram",
       gradient: "from-pink-500 to-rose-500",
     },
     {
       icon: <FaLinkedin size={14} />,
-      href: "#",
+      href: "https://www.linkedin.com/company/tradewinggs/",
       label: "LinkedIn",
       gradient: "from-blue-700 to-blue-800",
     },
     {
       icon: <FaYoutube size={14} />,
-      href: "#",
+      href: "https://youtube.com/@tradewinggs?si=9vcMbjUTIfzBFsGo",
       label: "YouTube",
       gradient: "from-red-600 to-red-700",
     },

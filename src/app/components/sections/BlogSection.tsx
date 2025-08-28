@@ -104,7 +104,7 @@ const blogPosts = [
     title: "The Power of Visual Content: Why Design Matters",
     excerpt:
       "Ever scrolled through social media and stopped because something looked amazing? That’s the magic of good design. In the fast-moving digital world, visuals play the biggest role...",
-    author: "Jane Doe",
+    author: "",
     date: "Aug 12, 2025",
     readTime: "4 min read",
     content: `Ever scrolled through social media and stopped because something looked amazing? That’s the magic of good design. In the fast-moving digital world, people decide in just a few seconds whether they want to pay attention to your brand — and visuals play the biggest role in that decision. Let’s break down why design matters so much and how it can boost your marketing.
@@ -131,7 +131,7 @@ In 2025, design isn’t optional — it’s a core part of your marketing. Inves
     title: "5 Digital Marketing Trends to Watch in 2025",
     excerpt:
       "Digital marketing never sits still — and neither should your strategy. If you want your business to shine this year, you’ve got to know what’s hot, what’s fading, and what’s about to explode.",
-    author: "John Smith",
+    author: "",
     date: "Aug 10, 2025",
     readTime: "5 min read",
     content: `Digital marketing never sits still — and neither should your strategy. If you want your business to shine this year, you’ve got to know what’s hot, what’s fading, and what’s about to explode. Here’s the lowdown on 5 trends that will rule 2025 (and how you can ride the wave).
@@ -157,7 +157,7 @@ Generic ads? Boring. In 2025, it’s all about content that feels made just for 
     title: "How Small Businesses Can Compete with Big Brands Online",
     excerpt:
       "Competing with big brands can feel like trying to race a Ferrari with a scooter. But in the digital world, size isn’t everything. With the right strategies, small businesses can grab attention.",
-    author: "Alex Johnson",
+    author: "",
     date: "Aug 5, 2025",
     readTime: "6 min read",
     content: `Let’s be honest — competing with big brands can feel like trying to race a Ferrari with a scooter. They’ve got huge budgets, big teams, and massive reach. But here’s the good news: in the digital world, size isn’t everything. With the right strategies, small businesses can grab attention, build loyal customers, and even beat the big players in certain areas. Here’s how you can make it happen 👇
