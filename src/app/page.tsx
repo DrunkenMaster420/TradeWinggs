@@ -58,7 +58,9 @@ export default function Home() {
 
   return (
     <main className="overflow-x-hidden">
-      <Navbar />
+      <h1>Website is on Hold for now, Try Harder</h1>
+      <img src="/assets/meme.jpg" alt="" />
+      {/* <Navbar />
       <HeroCarousel slides={slides} />
       <AboutSection />
       <ServicesSection />
@@ -67,7 +69,7 @@ export default function Home() {
       <BlogSection />
       <ContactSection />
       <Footer />
-      <WhatsAppButton />
+      <WhatsAppButton /> */}
     </main>
   );
 }
