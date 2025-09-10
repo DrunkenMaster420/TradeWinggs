@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
@@ -9,16 +10,31 @@ const TestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [current, setCurrent] = useState(0);
 
+  // ✅ Stable random floaters stored once in state (fix hydration)
+  const [floaters, setFloaters] = useState(
+    [] as { left: string; top: string; delay: number; duration: number }[]
+  );
+
+  useEffect(() => {
+    if (floaters.length === 0) {
+      const newFloaters = Array.from({ length: 12 }).map(() => ({
+        left: `${20 + Math.random() * 60}%`,
+        top: `${20 + Math.random() * 60}%`,
+        delay: Math.random() * 2,
+        duration: 4 + Math.random() * 3,
+      }));
+      setFloaters(newFloaters);
+    }
+  }, [floaters]);
+
   const testimonials = [
     {
       name: "Bhawan Mishra",
       position: "Director, Swastik Financial Services",
       review:
-        "Tradewinggs has helped us generate high-quality leads and manage our social media presence with great professionalism. Their strategies are smart, targeted, and deliver consistent results. It’s like having an in-house marketing team that truly cares about our success.",
+        "Tradewinggs has helped us generate high-quality leads and manage our social media presence with great professionalism. Their strategies are smart, targeted, and deliver consistent results. It’s like having an in-house marketing team that truly cares about our success.",
       rating: 5,
       image: "/testimonials/john.jpg",
-      // company: "Acme Corporation",
-      // industry: "Technology",
     },
     {
       name: "Kavita Jain",
@@ -27,34 +43,29 @@ const TestimonialsSection = () => {
         "Working with Tradewinggs for our social media marketing has been a game-changer. Our brand visibility has grown tremendously, and we’re connecting with more customers than ever before. The team’s creativity, timely execution, and attention to detail are commendable!",
       rating: 5,
       image: "/testimonials/jane.jpg",
-      company: "",
-      industry: "",
     },
     {
       name: "Gopal Garg",
       position: "CEO, Garg Digital Studio",
       review:
-        "We got our website made by Tradewinggs, and honestly, they did an amazing job. The design looks great, is super easy to use, and totally matches our brand. The whole process was smooth, and they delivered exactly what they said.",
+        "We got our website made by Tradewinggs, and honestly, they did an amazing job. The design looks great, is super easy to use, and totally matches our brand. The whole process was smooth, and they delivered exactly what they said.",
       rating: 5,
       image: "/testimonials/michael.jpg",
-      company: "",
-      industry: "",
     },
-
   ];
 
   const length = testimonials.length;
 
-  // ✅ Fixed: Wrapped in useCallback for stable reference
   const nextTestimonial = useCallback(
-    () => setCurrent(current === length - 1 ? 0 : current + 1),
-    [current, length]
+    () => setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1)),
+    [length]
   );
 
-  const prevTestimonial = () =>
-    setCurrent(current === 0 ? length - 1 : current - 1);
+  const prevTestimonial = useCallback(
+    () => setCurrent((prev) => (prev === 0 ? length - 1 : prev - 1)),
+    [length]
+  );
 
-  // ✅ Fixed: Auto-advance testimonials with proper dependencies
   useEffect(() => {
     const timer = setInterval(() => {
       nextTestimonial();
@@ -67,52 +78,27 @@ const TestimonialsSection = () => {
       id="testimonials"
       className="py-24 bg-[#ffffff] relative overflow-hidden"
     >
-      {/* Enhanced Background Elements */}
+      {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute top-20 left-20 w-72 h-72 bg-[#ffa238]/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-20 right-20 w-96 h-96 bg-[#241d49]/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.05, 0.15, 0.05],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Floating elements */}
-        {[...Array(12)].map((_, i) => (
+        {/* Floating dots */}
+        {floaters.map((f, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-[#ffa238]/20 rounded-full"
-            style={{
-              left: `${20 + Math.random() * 60}%`,
-              top: `${20 + Math.random() * 60}%`,
-            }}
-            animate={{
-              y: [0, -25, 0],
-              x: [0, 15, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
+            style={{ left: f.left, top: f.top }}
+            animate={{ y: [0, -25, 0], x: [0, 15, 0], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: f.duration, repeat: Infinity, delay: f.delay }}
           />
         ))}
       </div>
@@ -121,26 +107,11 @@ const TestimonialsSection = () => {
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          {/* Section Badge */}
-          <motion.div
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#ffa238]/10 to-[#ffa238]/5 px-4 py-2 rounded-full border border-[#ffa238]/20 mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={
-              isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
-            }
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <FaStar className="text-[#ffa238]" size={16} />
-            <span className="text-sm font-medium text-[#ffa238]">
-              Client Reviews
-            </span>
-          </motion.div>
-
           <h2 className="text-5xl md:text-6xl font-extrabold text-[#232a2f] mb-6">
-            What Our{" "}
+            What Our {" "}
             <span className="bg-gradient-to-r from-[#ffa238] to-[#ffa238]/70 bg-clip-text text-transparent">
               Clients Say
             </span>
@@ -152,23 +123,14 @@ const TestimonialsSection = () => {
         </motion.div>
 
         <div className="relative max-w-6xl mx-auto">
-          {/* Enhanced Quote Icon */}
           <motion.div
             className="absolute -top-12 left-1/2 -translate-x-1/2 text-8xl text-[#241d49]/20 z-0"
-            animate={{
-              rotate: [0, 5, -5, 0],
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           >
             <FaQuoteLeft />
           </motion.div>
 
-          {/* Enhanced Testimonial Content */}
           <div className="relative min-h-[500px] flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
@@ -179,124 +141,66 @@ const TestimonialsSection = () => {
                 transition={{ duration: 0.6, ease: "easeInOut" }}
                 className="text-center bg-[#ffffff]/95 backdrop-blur-lg p-12 rounded-3xl shadow-2xl border border-[#4e5458]/20 max-w-5xl mx-auto relative z-10 group"
               >
-                {/* Gradient Border Effect */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#ffa238]/20 via-transparent to-[#241d49]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm -z-10"></div>
-
-                {/* Enhanced Star Rating */}
                 <div className="flex justify-center mb-8">
-                  {[...Array(testimonials[current].rating)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                      transition={{
-                        delay: i * 0.1,
-                        type: "spring",
-                        stiffness: 200,
-                      }}
-                    >
-                      <FaStar className="text-[#ffa238] text-3xl mx-1 drop-shadow-sm" />
-                    </motion.div>
+                  {Array.from({ length: testimonials[current].rating }).map((_, i) => (
+                    <FaStar key={i} className="text-[#ffa238] text-3xl mx-1 drop-shadow-sm" />
                   ))}
                 </div>
 
-                {/* Review Text with Better Typography */}
-                <motion.p
-                  className="text-xl md:text-2xl italic mb-10 text-[#232a2f] leading-relaxed font-light tracking-wide"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
+                <p className="text-xl md:text-2xl italic mb-10 text-[#232a2f] leading-relaxed font-light tracking-wide">
                   &quot;{testimonials[current].review}&quot;
-                </motion.p>
+                </p>
 
-                {/* Enhanced Client Info */}
-                <motion.div
-                  className="relative"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  {/* Decorative Line */}
-                  <div className="w-20 h-1 bg-gradient-to-r from-[#ffa238] to-[#241d49] mx-auto mb-6 rounded-full"></div>
-
-                  <div className="flex flex-col items-center space-y-2">
-                    {/* Profile Avatar Placeholder */}
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#ffa238] to-[#241d49] rounded-full flex items-center justify-center text-[#ffffff] font-bold text-xl mb-2">
-                      {testimonials[current].name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </div>
-
-                    <h4 className="font-bold text-2xl text-[#232a2f]">
-                      {testimonials[current].name}
-                    </h4>
-                    <p className="text-[#ffa238] font-semibold text-lg">
-                      {testimonials[current].position}
-                    </p>
-                    <p className="text-[#4e5458] font-medium">
-                      {testimonials[current].company}
-                    </p>
-                    <div className="text-xs text-[#4e5458] bg-[#4e5458]/10 px-3 py-1 rounded-full">
-                      {testimonials[current].industry}
-                    </div>
+                <div className="flex flex-col items-center space-y-2">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#ffa238] to-[#241d49] rounded-full flex items-center justify-center text-[#ffffff] font-bold text-xl mb-2">
+                    {testimonials[current].name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </div>
-                </motion.div>
+                  <h4 className="font-bold text-2xl text-[#232a2f]">
+                    {testimonials[current].name}
+                  </h4>
+                  <p className="text-[#ffa238] font-semibold text-lg">
+                    {testimonials[current].position}
+                  </p>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Enhanced Navigation Buttons */}
+          {/* Controls */}
           <motion.button
             onClick={prevTestimonial}
-            className="absolute top-1/2 -left-6 md:-left-20 transform -translate-y-1/2 bg-[#ffffff] text-[#232a2f] p-5 rounded-full shadow-xl hover:bg-[#ffa238] hover:text-[#ffffff] transition-all duration-300 z-20 group border border-[#4e5458]/20 hover:border-[#ffa238]"
+            className="absolute top-1/2 -left-6 md:-left-20 transform -translate-y-1/2 bg-[#ffffff] text-[#232a2f] p-5 rounded-full shadow-xl hover:bg-[#ffa238] hover:text-[#ffffff] transition-all duration-300 z-20 border border-[#4e5458]/20 hover:border-[#ffa238]"
             whileHover={{ scale: 1.1, x: -5 }}
             whileTap={{ scale: 0.9 }}
           >
-            <FiArrowLeft
-              size={24}
-              className="transition-transform group-hover:-translate-x-1"
-            />
+            <FiArrowLeft size={24} />
           </motion.button>
 
           <motion.button
             onClick={nextTestimonial}
-            className="absolute top-1/2 -right-6 md:-right-20 transform -translate-y-1/2 bg-[#ffffff] text-[#232a2f] p-5 rounded-full shadow-xl hover:bg-[#ffa238] hover:text-[#ffffff] transition-all duration-300 z-20 group border border-[#4e5458]/20 hover:border-[#ffa238]"
+            className="absolute top-1/2 -right-6 md:-right-20 transform -translate-y-1/2 bg-[#ffffff] text-[#232a2f] p-5 rounded-full shadow-xl hover:bg-[#ffa238] hover:text-[#ffffff] transition-all duration-300 z-20 border border-[#4e5458]/20 hover:border-[#ffa238]"
             whileHover={{ scale: 1.1, x: 5 }}
             whileTap={{ scale: 0.9 }}
           >
-            <FiArrowRight
-              size={24}
-              className="transition-transform group-hover:translate-x-1"
-            />
+            <FiArrowRight size={24} />
           </motion.button>
 
-          {/* Enhanced Pagination Dots */}
+          {/* Dots */}
           <div className="flex justify-center space-x-4 mt-12">
             {testimonials.map((_, index) => (
-              <motion.button
+              <button
                 key={index}
                 onClick={() => setCurrent(index)}
-                className={`relative overflow-hidden transition-all duration-300 ${current === index
-                  ? "w-12 h-4 bg-[#ffa238] rounded-full"
-                  : "w-4 h-4 bg-[#4e5458]/30 hover:bg-[#ffa238]/50 rounded-full"
+                className={`w-4 h-4 rounded-full transition ${current === index ? "bg-[#ffa238]" : "bg-gray-300 hover:bg-[#ffa238]/50"
                   }`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {current === index && (
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#ffa238] to-[#241d49] rounded-full"
-                    layoutId="activeIndicator"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </motion.button>
+              />
             ))}
           </div>
 
-          {/* Progress Bar */}
+          {/* Progress */}
           <div className="mt-6 max-w-md mx-auto">
             <div className="w-full bg-[#4e5458]/20 rounded-full h-1">
               <motion.div

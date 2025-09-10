@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import Navbar from "./components/ui/Navbar";
 import HeroCarousel from "./components/sections/HeroCarousel";
 import AboutSection from "./components/sections/AboutSection";
@@ -11,14 +11,19 @@ import BlogSection from "./components/sections/BlogSection";
 import Footer from "./components/ui/Footer";
 import WhatsAppButton from "./components/ui/WhatsAppButton";
 
-export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
+interface Slide {
+  title: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  image: string;
+}
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+const Home: React.FC = () => {
+  const [showProducts, setShowProducts] = useState<boolean>(false);
+  const [showBlog, setShowBlog] = useState<boolean>(false);
 
-  const slides = [
+  const slides: Slide[] = [
     {
       title: "Grow Your Brand with Us",
       description:
@@ -45,31 +50,39 @@ export default function Home() {
     },
   ];
 
-  if (!isLoaded) {
-    return (
-      <div className="fixed inset-0 bg-darkblue flex items-center justify-center z-50">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-orange border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-xl font-semibold">Loading...</p>
-        </div>
-      </div>
-    );
-  }
+  const handleShowProducts = useCallback(() => {
+    setShowProducts(true);
+  }, []);
+
+  const handleShowBlog = useCallback(() => {
+    setShowBlog(true);
+  }, []);
 
   return (
-    <main className="overflow-x-hidden">
-      {/* <h1>Website is on Hold for now, Try Harder</h1>
-      <img src="/assets/meme.jpg" alt="" /> */}
-      <Navbar />
+    <main className="overflow-x-hidden" role="main">
+      <Navbar
+        onProductsClick={handleShowProducts}
+        onBlogClick={handleShowBlog}
+      />
       <HeroCarousel slides={slides} />
       <AboutSection />
       <ServicesSection />
-      <ProductsSection />
+      {showProducts && (
+        <section id="products" aria-label="Products Section">
+          <ProductsSection />
+        </section>
+      )}
       <TestimonialsSection />
-      <BlogSection />
+      {showBlog && (
+        <section id="blog" aria-label="Blog Section">
+          <BlogSection />
+        </section>
+      )}
       <ContactSection />
       <Footer />
       <WhatsAppButton />
     </main>
   );
-}
+};
+
+export default Home;
