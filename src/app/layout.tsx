@@ -25,24 +25,24 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/assets/logo.jpg",
+        url: "/assets/logo.webp",
         sizes: "32x32",
-        type: "image/jpeg",
+        type: "image/webp",
       },
       {
-        url: "/assets/logo.jpg",
+        url: "/assets/logo.webp",
         sizes: "16x16",
-        type: "image/jpeg",
+        type: "image/webp",
       },
     ],
     apple: [
       {
-        url: "/assets/logo.jpg",
+        url: "/assets/logo.webp",
         sizes: "180x180",
-        type: "image/jpeg",
+        type: "image/webp",
       },
     ],
-    shortcut: "/assets/logo.jpg",
+    shortcut: "/assets/logo.webp",
   },
   openGraph: {
     type: "website",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     siteName: "Tradewinggs",
     images: [
       {
-        url: "/assets/logo.jpg",
+        url: "/assets/logo.webp",
         width: 1200,
         height: 630,
         alt: "Tradewinggs Logo",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: "Tradewinggs - Your Brand Partner in the Digital World",
     description:
       "Professional digital marketing services including SEO, social media marketing, web development, and product trading solutions.",
-    images: ["/assets/logo.jpg"],
+    images: ["/assets/logo.webp"],
   },
   robots: {
     index: true,
@@ -97,15 +97,15 @@ export default function RootLayout({
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/assets/logo.jpg"
+          href="/assets/logo.webp"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/assets/logo.jpg"
+          href="/assets/logo.webp"
         />
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.jpg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.webp" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ffa238" />
         <meta name="msapplication-TileColor" content="#ffa238" />

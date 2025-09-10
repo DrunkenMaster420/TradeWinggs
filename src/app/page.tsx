@@ -25,7 +25,7 @@ export default function Home() {
         "Welcome to Tradewinggs – your partner in digital marketing and product trading. Let's take your business to new heights!",
       ctaText: "Get Started",
       ctaLink: "#contact",
-      image: "/assets/slide1.jpg",
+      image: "/assets/slide1.webp",
     },
     {
       title: "Expert Digital Marketing",
@@ -33,7 +33,7 @@ export default function Home() {
         "SEO, Social Media, Paid Ads, Branding, Website & App Development, Graphic Design and more.",
       ctaText: "Explore Services",
       ctaLink: "#services",
-      image: "/assets/slide2.jpg",
+      image: "/assets/slide2.webp",
     },
     {
       title: "Product Trading & Catalogs",
@@ -41,7 +41,7 @@ export default function Home() {
         "High quality product categories and downloadable catalogs tailored for your business needs.",
       ctaText: "View Products",
       ctaLink: "#products",
-      image: "/images/slide3.jpg",
+      image: "/images/slide3.webp",
     },
   ];
 
@@ -58,9 +58,9 @@ export default function Home() {
 
   return (
     <main className="overflow-x-hidden">
-      <h1>Website is on Hold for now, Try Harder</h1>
-      <img src="/assets/meme.jpg" alt="" />
-      {/* <Navbar />
+      {/* <h1>Website is on Hold for now, Try Harder</h1>
+      <img src="/assets/meme.jpg" alt="" /> */}
+      <Navbar />
       <HeroCarousel slides={slides} />
       <AboutSection />
       <ServicesSection />
@@ -69,7 +69,7 @@ export default function Home() {
       <BlogSection />
       <ContactSection />
       <Footer />
-      <WhatsAppButton /> */}
+      <WhatsAppButton />
     </main>
   );
 }

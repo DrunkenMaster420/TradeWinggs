@@ -72,6 +72,7 @@ const ContactSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   /* ─────────────  FORM SUBMIT HANDLER (typed)  ───────────── */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -86,7 +87,7 @@ const ContactSection = () => {
         EMAILJS_PUB_KEY
       );
       setStatus("success");
-      e.currentTarget.reset();
+      formRef.current?.reset();
     } catch (err) {
       console.error(err);
       setStatus("error");
@@ -230,7 +231,7 @@ const ContactSection = () => {
               <p className="text-gray-700">Fill out the form and we&apos;ll get back to you soon.</p>
             </div>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form ref={formRef} className="space-y-5" onSubmit={handleSubmit}>
               {/* name + email */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <InputField id="from_name" label="Full Name *" type="text" placeholder="Your Name" />

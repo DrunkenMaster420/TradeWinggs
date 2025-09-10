@@ -12,25 +12,25 @@ const ProductsSection = () => {
   const products = [
     {
       category: "Electronics",
-      image: "/products/electronics.png",
+      image: "/products/electronics.webp",
       description: "Latest gadgets and electronic devices",
       items: "500+ Products",
     },
     {
       category: "Apparel",
-      image: "/products/apparel.jpg",
+      image: "/products/apparel.webp",
       description: "Fashion and clothing for all occasions",
       items: "300+ Products",
     },
     {
       category: "Home & Living",
-      image: "/products/home.jpg",
+      image: "/products/home.webp",
       description: "Home decor and lifestyle products",
       items: "400+ Products",
     },
     {
       category: "Beauty & Wellness",
-      image: "/products/beauty.jpg",
+      image: "/products/beauty.webp",
       description: "Health and beauty essentials",
       items: "250+ Products",
     },

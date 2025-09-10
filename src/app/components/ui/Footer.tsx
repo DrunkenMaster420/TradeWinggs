@@ -139,7 +139,7 @@ const Footer = () => {
             >
               <div className="relative">
                 <Image
-                  src="/assets/logo.jpg"
+                  src="/assets/logo.webp"
                   alt="Tradewinggs Logo"
                   width={32}
                   height={32}
@@ -264,7 +264,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <Image
-                  src="/images/GoogleMaps.png"
+                  src="/images/GoogleMaps.webp"
                   alt="Office Location Map"
                   width={300}
                   height={60}

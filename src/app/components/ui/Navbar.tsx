@@ -81,7 +81,7 @@ const Navbar = () => {
           >
             <div className="relative">
               <Image
-                src="/assets/logo.jpg"
+                src="/assets/logo.webp"
                 alt="Tradewings Logo"
                 width={35}
                 height={35}
