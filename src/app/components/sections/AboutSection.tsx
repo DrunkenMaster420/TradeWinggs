@@ -286,7 +286,7 @@ const AboutSection = () => {
           variants={itemVariants}
           className="text-center max-w-4xl mx-auto mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#232a2f] to-[#4e5458] mb-6 leading-tight">
+          <h2 style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }} className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#232a2f] to-[#4e5458] mb-6 leading-tight">
             Your Brand Partner in the Digital World
           </h2>
           <p className="text-lg md:text-xl text-[#4e5458] max-w-3xl mx-auto leading-relaxed">
