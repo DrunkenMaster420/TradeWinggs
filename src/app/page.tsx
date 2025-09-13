@@ -60,7 +60,9 @@ const Home: React.FC = () => {
 
   return (
     <main className="overflow-x-hidden" role="main">
-      <Navbar
+      <h3>Website is on Hold</h3>
+      <img src="/assets/meme.jpg" alt="" />
+      {/* <Navbar
         onProductsClick={handleShowProducts}
         onBlogClick={handleShowBlog}
       />
@@ -80,7 +82,7 @@ const Home: React.FC = () => {
       )}
       <ContactSection />
       <Footer />
-      <WhatsAppButton />
+      <WhatsAppButton /> */}
     </main>
   );
 };
